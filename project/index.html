@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArvoSettle — The Final Word on the Flip</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ══════════════════ SIDEBAR ══════════════════ -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-mark">
+        <svg viewBox="0 0 20 20"><path d="M10 2L2 8v10h5v-5h6v5h5V8z"/></svg>
+      </div>
+      <div>
+        <div class="brand-name"><span class="arvo">Arvo</span><span class="settle">Settle</span></div>
+        <div class="brand-ver">The Final Word on the Flip</div>
+      </div>
+    </div>
+
+    <div class="top-bar">
+      <div class="mode-toggle">
+        <button class="mode-btn active" id="btnSimple" onclick="setMode('simple')">Simple</button>
+        <button class="mode-btn"        id="btnPro"    onclick="setMode('pro')">Pro</button>
+      </div>
+      <button class="profile-btn" onclick="openProfiles()">⚙ Profiles</button>
+    </div>
+
+    <div class="sb-sections">
+
+      <!-- DEAL BASICS -->
+      <div class="sb-section open" id="sec-basics">
+        <div class="sb-section-hd" onclick="toggleSec('basics')">
+          <div class="sb-section-title"><span class="sb-section-icon">🏠</span> Deal Basics</div>
+          <span class="sb-section-chev">&#9660;</span>
+        </div>
+        <div class="sb-section-body">
+          <div class="field">
+            <div class="fl">Purchase Price</div>
+            <div class="iw"><span class="pre">$</span><input type="number" id="purchase" value="250000" min="0"></div>
+            <div class="field-msg" id="msg-purchase"></div>
+          </div>
+          <div class="field">
+            <div class="fl">After Repair Value (ARV)</div>
+            <div class="iw"><span class="pre">$</span><input type="number" id="arv" value="380000" min="0"></div>
+            <div class="field-msg" id="msg-arv"></div>
+          </div>
+          <div class="field">
+            <div class="fl">Renovation Cost</div>
+            <div class="iw"><span class="pre">$</span><input type="number" id="rehab" value="45000" min="0"></div>
+            <div class="field-msg" id="msg-rehab"></div>
+          </div>
+          <div class="field">
+            <div class="fl">Desired Profit</div>
+            <div class="iw"><span class="pre">$</span><input type="number" id="desired" value="30000" min="0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COSTS & TIMING -->
+      <div class="sb-section open" id="sec-costs">
+        <div class="sb-section-hd" onclick="toggleSec('costs')">
+          <div class="sb-section-title"><span class="sb-section-icon">📋</span> Costs &amp; Timing</div>
+          <span class="sb-section-chev">&#9660;</span>
+        </div>
+        <div class="sb-section-body">
+          <div class="field-grid">
+            <div class="field">
+              <div class="fl">Closing <span class="tip">?<span class="tip-b">Buy-side closing costs as % of purchase price. Includes title, escrow, recording, etc.</span></span></div>
+              <div class="iw bare"><input type="number" id="closing" value="3" step="0.1" min="0" max="15"><span class="suf">%</span></div>
+            </div>
+            <div class="field">
+              <div class="fl">Selling</div>
+              <div class="iw bare"><input type="number" id="selling" value="6" step="0.1" min="0" max="40"><span class="suf">%</span></div>
+            </div>
+          </div>
+          <div class="field-grid">
+            <div class="field">
+              <div class="fl">Hold Time <span class="tip">?<span class="tip-b">Months from purchase to sale close. Drives carry cost. Every extra month compounds your losses.</span></span></div>
+              <div class="iw bare"><input type="number" id="months" value="4" min="1" max="48"><span class="suf">mo</span></div>
+            </div>
+            <div class="field">
+              <div class="fl">Fixed Holding</div>
+              <div class="iw"><span class="pre">$</span><input type="number" id="holding" value="8000" min="0"></div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="fl">Monthly Carry Cost <span class="tip">?<span class="tip-b">Per-month costs: taxes, insurance, utilities, HOA. Does NOT include financing — set that in the Financing section below.</span></span></div>
+            <div class="iw"><span class="pre">$</span><input type="number" id="monthly" value="0" min="0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINANCING (Pro) -->
+      <div class="sb-section" id="sec-financing">
+        <div class="sb-section-hd" onclick="toggleSec('financing')">
+          <div class="sb-section-title"><span class="sb-section-icon">🏦</span> Financing</div>
+          <span class="sb-section-chev">&#9660;</span>
+        </div>
+        <div class="sb-section-body">
+          <div class="toggle-row" style="margin-bottom:.55rem">
+            <span class="toggle-label">Enable financing model</span>
+            <label class="sw"><input type="checkbox" id="finEnabled" onchange="calc()"><span class="sw-track"></span></label>
+          </div>
+          <div id="finFields">
+            <div class="field-grid">
+              <div class="field">
+                <div class="fl">Loan Amount <span class="tip">?<span class="tip-b">Total borrowed: purchase + rehab if using a hard-money loan, or just purchase for conventional.</span></span></div>
+                <div class="iw"><span class="pre">$</span><input type="number" id="loanAmt" value="225000" min="0"></div>
+              </div>
+              <div class="field">
+                <div class="fl">Interest Rate</div>
+                <div class="iw bare"><input type="number" id="intRate" value="10" step="0.1" min="0" max="30"><span class="suf">%</span></div>
+              </div>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <div class="fl">Points <span class="tip">?<span class="tip-b">Origination points paid upfront. 1 point = 1% of loan amount.</span></span></div>
+                <div class="iw bare"><input type="number" id="points" value="2" step="0.5" min="0" max="10"><span class="suf">pts</span></div>
+              </div>
+              <div class="field">
+                <div class="fl">Type</div>
+                <select id="loanType" onchange="calc()" style="width:100%;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:var(--bg-3);border:0.5px solid var(--line);border-radius:var(--r);color:var(--text-1);outline:none;">
+                  <option value="io">Interest-Only</option>
+                  <option value="am">Amortizing</option>
+                </select>
+              </div>
+            </div>
+            <div class="field" id="amField" style="display:none">
+              <div class="fl">Amort. Term</div>
+              <div class="iw bare"><input type="number" id="amTerm" value="30" min="5" max="40"><span class="suf">yr</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RISK & OVERRUNS (Pro) -->
+      <div class="sb-section" id="sec-risk">
+        <div class="sb-section-hd" onclick="toggleSec('risk')">
+          <div class="sb-section-title"><span class="sb-section-icon">⚡</span> Risk Factors</div>
+          <span class="sb-section-chev">&#9660;</span>
+        </div>
+        <div class="sb-section-body">
+          <div class="field">
+            <div class="fl">Rehab Overrun Reserve <span class="tip">?<span class="tip-b">How much extra above your estimate to model as a contingency. Industry standard is 10–20% for most projects, 25%+ for unknowns.</span></span></div>
+            <div class="iw bare"><input type="number" id="overrun" value="10" step="5" min="0" max="50"><span class="suf">%</span></div>
+          </div>
+          <div class="field">
+            <div class="fl">Vacancy / Delay Buffer <span class="tip">?<span class="tip-b">Extra months of carry to model beyond your estimated hold time. Accounts for listing delays, slow buyers, re-listing risk.</span></span></div>
+            <div class="iw bare"><input type="number" id="delayBuf" value="1" step="0.5" min="0" max="12"><span class="suf">mo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ARV SENSITIVITY (Pro) -->
+      <div class="sb-section" id="sec-arv">
+        <div class="sb-section-hd" onclick="toggleSec('arv')">
+          <div class="sb-section-title"><span class="sb-section-icon">📈</span> ARV Scenario</div>
+          <span class="sb-section-chev">&#9660;</span>
+        </div>
+        <div class="sb-section-body">
+          <div class="arv-tabs">
+            <div class="arv-tab" id="arv-tab-bear" onclick="setArvMode('bear')">−10%</div>
+            <div class="arv-tab active" id="arv-tab-base" onclick="setArvMode('base')">Base</div>
+            <div class="arv-tab" id="arv-tab-bull" onclick="setArvMode('bull')">+7%</div>
+          </div>
+          <div class="arv-tab-note" id="arvModeNote">Using your ARV as entered</div>
+        </div>
+      </div>
+
+    </div><!-- /sb-sections -->
+
+    <!-- Presets -->
+    <div class="preset-row">
+      <div class="preset-label">Quick Presets</div>
+      <div class="preset-pills">
+        <button class="preset-pill" onclick="applyPreset('cosmetic')">🎨 Cosmetic</button>
+        <button class="preset-pill" onclick="applyPreset('full')">🔨 Full Reno</button>
+        <button class="preset-pill" onclick="applyPreset('brrrr')">🏦 BRRRR</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="main">
+
+    <!-- Verdict -->
+    <div class="verdict" id="verdict">
+      <div class="verdict-emoji" id="verdictEmoji">—</div>
+      <div class="verdict-body">
+        <div class="verdict-lbl">Deal Verdict</div>
+        <div class="verdict-txt" id="verdictTxt">Enter your numbers</div>
+        <div class="verdict-sub" id="verdictSub">Fill in the fields on the left to get a decision</div>
+      </div>
+    </div>
+
+    <!-- Net Profit Hero -->
+    <div class="hero">
+      <div class="hero-lbl" id="heroLbl">Net Profit</div>
+      <div class="hero-val" id="heroVal">$0</div>
+      <div class="hero-bar" id="heroBar"></div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-lbl">Return on Investment</div>
+        <div class="kpi-val" id="roiVal">0%</div>
+        <div class="kpi-sub" id="roiSub">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Investment Grade <span class="tip">?<span class="tip-b">A = Excellent · B = Good · C = Risky · D = Walk away. Composite of ROI and profit margin.</span></span></div>
+        <div class="kpi-val" id="gradeVal" style="font-size:28px">—</div>
+        <div class="grade-badge" id="gradeBadge">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Profit Margin <span class="tip">?<span class="tip-b">Net profit ÷ ARV. Healthy flips target 15–20%+.</span></span></div>
+        <div class="kpi-val" id="marginVal">0%</div>
+        <div class="kpi-sub" id="marginSub">of ARV</div>
+      </div>
+    </div>
+
+    <!-- Insight -->
+    <div class="insight">
+      <div class="insight-icon">📊</div>
+      <div class="insight-txt" id="insightTxt">—</div>
+    </div>
+
+    <!-- Offer Card -->
+    <div class="offer-card">
+      <div class="offer-hd">
+        <div>
+          <div class="offer-hd-lbl">Recommended Offer Price</div>
+          <div class="offer-hd-title">Maximum you should pay at each risk level</div>
+        </div>
+        <div class="roi-wrap" id="roiWrap">
+          <label for="targetRoi">Target ROI</label>
+          <input type="number" id="targetRoi" value="15" min="1" max="100" step="1">
+          <span style="font-size:10px;color:var(--text-3)">%</span>
+        </div>
+      </div>
+      <div class="offer-boxes">
+        <div class="offer-box" id="offerCBox">
+          <div class="offer-box-lbl">Conservative</div>
+          <div class="offer-box-val" id="offerCVal">—</div>
+          <div class="offer-box-note" id="offerCNote">Guarantees target profit after buffer</div>
+        </div>
+        <div class="offer-box" id="offerRBox">
+          <div class="offer-box-lbl">ROI Target</div>
+          <div class="offer-box-val" id="offerRVal">—</div>
+          <div class="offer-box-note" id="offerRNote">Hits target ROI</div>
+        </div>
+        <div class="offer-box" id="offerABox">
+          <div class="offer-box-lbl">Aggressive <span class="tip">?<span class="tip-b">No contingency buffer, no overrun reserve. Only for highly experienced investors with strong market knowledge.</span></span></div>
+          <div class="offer-box-val" id="offerAVal">—</div>
+          <div class="offer-box-note">No contingency buffer</div>
+        </div>
+      </div>
+      <div class="buf-row">
+        <span class="buf-label">Safety buffer:</span>
+        <input type="range" class="buf-slider" id="safeBuf" min="0" max="25" step="5" value="10" oninput="updateBufLabel(); calc()">
+        <span class="buf-val" id="bufVal">10%</span>
+      </div>
+      <div class="buf-note" id="bufNote">Conservative offer deducts 10% of costs as a negotiation / contingency reserve</div>
+    </div>
+
+    <!-- Risk Scenarios Panel -->
+    <div class="risk-panel">
+      <button class="risk-toggle" id="riskToggle" onclick="toggleRisk()">
+        <span>⚡ Stress-test scenarios</span>
+        <span class="chev">&#9660;</span>
+      </button>
+      <div class="risk-body" id="riskBody">
+        <div class="risk-scenarios">
+          <div class="risk-col">
+            <div class="risk-col-hd" style="color:var(--green)">Bull</div>
+            <div class="risk-row"><span class="risk-lbl">ARV</span><span class="risk-val" id="rs-bull-arv">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">Profit</span><span class="risk-val" id="rs-bull-profit">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">ROI</span><span class="risk-val" id="rs-bull-roi">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">Margin</span><span class="risk-val" id="rs-bull-margin">—</span></div>
+          </div>
+          <div class="risk-col">
+            <div class="risk-col-hd" style="color:var(--yellow)">Base</div>
+            <div class="risk-row"><span class="risk-lbl">ARV</span><span class="risk-val" id="rs-base-arv">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">Profit</span><span class="risk-val" id="rs-base-profit">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">ROI</span><span class="risk-val" id="rs-base-roi">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">Margin</span><span class="risk-val" id="rs-base-margin">—</span></div>
+          </div>
+          <div class="risk-col">
+            <div class="risk-col-hd" style="color:var(--red)">Bear</div>
+            <div class="risk-row"><span class="risk-lbl">ARV</span><span class="risk-val" id="rs-bear-arv">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">Profit</span><span class="risk-val" id="rs-bear-profit">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">ROI</span><span class="risk-val" id="rs-bear-roi">—</span></div>
+            <div class="risk-row"><span class="risk-lbl">Margin</span><span class="risk-val" id="rs-bear-margin">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cost Breakdown -->
+    <div class="brk">
+      <button class="brk-toggle" id="brkToggle" onclick="toggleBrk()">
+        <span id="brkLabel">Show cost breakdown</span>
+        <span class="chev">&#9660;</span>
+      </button>
+      <div class="brk-body" id="brkBody">
+        <div class="brow"><span class="bn">Purchase Price</span><span class="bv" id="bPurchase">—</span></div>
+        <div class="brow"><span class="bn">Renovation Cost</span><span class="bv" id="bRehab">—</span></div>
+        <div class="brow"><span class="bn" id="bRehabOverrunLbl" style="display:none">  └ Overrun Reserve</span><span class="bv" id="bRehabOverrun" style="display:none">—</span></div>
+        <div class="brow"><span class="bn">Holding Costs (fixed)</span><span class="bv" id="bHolding">—</span></div>
+        <div class="brow"><span class="bn">Closing Costs</span><span class="bv" id="bClosing">—</span></div>
+        <div class="brow"><span class="bn">Selling Costs</span><span class="bv" id="bSelling">—</span></div>
+        <div class="brow"><span class="bn">Carry Costs <span class="brow-sub" id="bCarryDetail"></span></span><span class="bv" id="bCarrying">—</span></div>
+        <div class="brow" id="bFinRow" style="display:none"><span class="bn">Financing Costs <span class="brow-sub" id="bFinDetail"></span></span><span class="bv" id="bFin">—</span></div>
+        <div class="brow total-row"><span class="bn">Net Profit</span><span class="bv" id="bProfit">—</span></div>
+      </div>
+    </div>
+
+    <!-- Assumptions -->
+    <div class="asm">
+      <button class="asm-toggle" id="asmToggle" onclick="toggleAsm()">
+        <span>📌 View calculation assumptions</span>
+        <span class="chev">&#9660;</span>
+      </button>
+      <div class="asm-body" id="asmBody">
+        <span class="asm-chip" id="asmSelling">6% selling</span>
+        <span class="asm-chip" id="asmClosing">3% closing</span>
+        <span class="asm-chip" id="asmMonths">4-month hold</span>
+        <span class="asm-chip" id="asmArv">Base ARV</span>
+        <span class="asm-chip" id="asmFin">No financing</span>
+        <span class="asm-chip" id="asmOverrun">10% overrun reserve</span>
+        <span class="asm-chip">No capital gains tax</span>
+      </div>
+    </div>
+
+    <div class="footer">Estimates only — consult a licensed real estate professional before making investment decisions.</div>
+
+  </main>
+</div>
+
+<!-- ── PROFILE MODAL ── -->
+<div class="modal-bg" id="profileModal">
+  <div class="modal">
+    <div class="modal-title">Assumption Profiles</div>
+    <div class="modal-sub">Saved cost structures. Select a profile to load its defaults.</div>
+    <div class="profile-list" id="profileList"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeProfiles()">Cancel</button>
+      <button class="btn btn-primary" onclick="applyProfile()">Apply Profile</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
