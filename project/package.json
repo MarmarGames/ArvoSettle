@@ -1,0 +1,16 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Real Estate Calculator",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^41.5.0"
+  }
+}
