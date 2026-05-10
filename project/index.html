@@ -33,17 +33,47 @@ body {
   color: var(--text-1);
   min-height: 100vh;
   font-size: 13px;
-
-    -webkit-app-region: drag;
 }
 
-input, 
-button, 
-select, 
-.interactive-element {
+input,
+button,
+select,
+textarea,
+label,
+a,
+[onclick],
+.interactive-element,
+.modal-bg,
+.modal,
+.user-modal,
+.profile-item,
+.profile-item-actions,
+.mode-toggle,
+.mode-btn,
+.preset-pill,
+.arv-tab,
+.sb-section-hd,
+.risk-toggle,
+.brk-toggle,
+.asm-toggle,
+.user-avatar-btn,
+.profile-btn,
+.toggle-row,
+.sw,
+.sw-track,
+.buf-slider,
+.add-to-profile-btn,
+.roi-wrap,
+.roi-wrap input,
+.pf-input,
+.pf-field,
+.add-deal-input,
+.add-deal-modal,
+.up-tab,
+.up-tabs,
+.profile-icon-btn {
   -webkit-app-region: no-drag;
-
-  
+  user-select: auto;
 }
 
 /* ── LAYOUT ── */
@@ -117,6 +147,95 @@ select,
 }
 .profile-btn:hover { background: var(--bg-3); }
 
+/* ── USER AVATAR BUTTON ── */
+.user-avatar-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 4px 8px 4px 4px;
+  background: none; border: 0.5px solid var(--line);
+  border-radius: 99px; cursor: pointer;
+  transition: background .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.user-avatar-btn:hover { background: var(--bg-3); border-color: var(--line-s); }
+.user-avatar-circle {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent); color: #0f0f0f;
+  font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; letter-spacing: 0;
+}
+.user-avatar-name {
+  font-size: 10px; font-weight: 500; color: var(--text-2);
+  max-width: 72px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ── USER PROFILE MODAL ── */
+.user-modal {
+  background: var(--bg-2); border: 0.5px solid var(--line-s);
+  border-radius: var(--r-xl); padding: 1.5rem;
+  width: 460px; max-width: 95vw; max-height: 90vh; overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.user-modal-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.2rem; padding-bottom: 1rem;
+  border-bottom: 0.5px solid var(--line);
+}
+.user-modal-avatar-lg {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--accent); color: #0f0f0f;
+  font-size: 22px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.user-modal-title-area { flex: 1; }
+.user-modal-title { font-size: 15px; font-family: 'Instrument Serif', serif; }
+.user-modal-subtitle { font-size: 10px; color: var(--text-3); margin-top: 2px; }
+.user-field { margin-bottom: 1rem; }
+.user-field:last-child { margin-bottom: 0; }
+.user-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 5px; display: flex; align-items: center; gap: 5px;
+}
+.user-input {
+  width: 100%; padding: 8px 10px;
+  font-size: 13px; font-family: 'DM Sans', sans-serif;
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); color: var(--text-1); outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-app-region: no-drag;
+}
+.user-input:focus { border-color: var(--line-s); box-shadow: 0 0 0 2px rgba(200,181,96,.08); }
+.user-input.input-error { border-color: rgba(200,74,58,.5); box-shadow: 0 0 0 2px rgba(200,74,58,.1); }
+textarea.user-input {
+  resize: none; height: 80px; line-height: 1.55;
+  font-size: 12px;
+}
+.user-char-count {
+  font-size: 9px; color: var(--text-3); text-align: right; margin-top: 3px;
+}
+.filter-msg {
+  font-size: 10px; margin-top: 5px; color: var(--red);
+  display: none; line-height: 1.45;
+}
+.filter-msg.show { display: block; }
+.save-status {
+  font-size: 10px; color: var(--green);
+  display: none; margin-top: 4px; text-align: center;
+}
+.save-status.show { display: block; }
+.btn-saving {
+  opacity: .6; pointer-events: none;
+}
+/* Pro badge in sidebar */
+.pro-badge {
+  display: inline-flex; align-items: center;
+  background: rgba(200,181,96,.12); border: 0.5px solid rgba(200,181,96,.3);
+  border-radius: 99px; padding: 2px 7px;
+  font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); margin-left: 4px;
+}
+
 /* Sections */
 .sb-sections { flex: 1; overflow-y: auto; padding: .5rem 0; }
 
@@ -188,6 +307,7 @@ select,
   background: var(--bg-3); border: 0.5px solid var(--line);
   border-radius: var(--r); color: var(--text-1); outline: none;
   transition: border-color .15s, box-shadow .15s;
+  -webkit-app-region: no-drag;
 }
 .iw input:focus { border-color: var(--line-s); }
 .iw.bare input { padding-left: 9px; }
@@ -326,6 +446,7 @@ select,
   width: 52px; padding: 4px 6px; font-size: 12px; font-family: 'DM Mono', monospace;
   background: var(--bg-3); border: 0.5px solid var(--line); border-radius: var(--r);
   color: var(--text-1); outline: none; text-align: center;
+  -webkit-app-region: no-drag;
 }
 .offer-boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
 @media(max-width: 600px) { .offer-boxes { grid-template-columns: 1fr; } }
@@ -341,7 +462,7 @@ select,
 /* buffer slider inside offer card */
 .buf-row { display: flex; align-items: center; gap: 8px; margin-top: .75rem; padding-top: .65rem; border-top: 0.5px solid var(--line); }
 .buf-label { font-size: 10px; color: var(--text-3); flex-shrink: 0; }
-.buf-slider { flex: 1; accent-color: var(--accent); }
+.buf-slider { flex: 1; accent-color: var(--accent); -webkit-app-region: no-drag; }
 .buf-val { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--accent); width: 36px; text-align: right; flex-shrink: 0; }
 .buf-note { font-size: 9px; color: var(--text-3); margin-top: 4px; }
 
@@ -355,6 +476,7 @@ select,
   padding: .75rem 1.2rem; font-size: 11px;
   font-family: 'DM Sans', sans-serif; color: var(--text-2); cursor: pointer;
   display: flex; justify-content: space-between; align-items: center; font-weight: 500;
+  -webkit-app-region: no-drag;
 }
 .risk-toggle:hover { background: var(--bg-hover); }
 .risk-toggle .chev { font-size: 8px; transition: transform .2s; }
@@ -383,6 +505,7 @@ select,
   padding: .75rem 1.2rem; font-size: 11px;
   font-family: 'DM Sans', sans-serif; color: var(--text-2); cursor: pointer;
   display: flex; justify-content: space-between; align-items: center; font-weight: 500;
+  -webkit-app-region: no-drag;
 }
 .brk-toggle:hover { background: var(--bg-hover); }
 .brk-toggle .chev { font-size: 8px; transition: transform .2s; }
@@ -406,6 +529,7 @@ select,
   padding: .65rem 1.2rem; font-size: 11px;
   font-family: 'DM Sans', sans-serif; color: var(--text-3); cursor: pointer;
   display: flex; justify-content: space-between; align-items: center;
+  -webkit-app-region: no-drag;
 }
 .asm-toggle:hover { background: var(--bg-hover); }
 .asm-toggle .chev { font-size: 8px; transition: transform .2s; }
@@ -422,36 +546,180 @@ select,
   background: rgba(0,0,0,.7); z-index: 200;
   align-items: center; justify-content: center;
   backdrop-filter: blur(4px);
+  -webkit-app-region: no-drag;
 }
 .modal-bg.show { display: flex; }
 .modal {
   background: var(--bg-2); border: 0.5px solid var(--line-s);
   border-radius: var(--r-xl); padding: 1.5rem;
-  width: 380px; max-width: 95vw;
+  width: 480px; max-width: 95vw; max-height: 90vh;
+  display: flex; flex-direction: column;
   box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  -webkit-app-region: no-drag;
 }
 .modal-title { font-size: 15px; font-family: 'Instrument Serif', serif; margin-bottom: .3rem; }
 .modal-sub { font-size: 11px; color: var(--text-2); margin-bottom: 1rem; }
-.profile-list { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; }
+.profile-list { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1rem; overflow-y: auto; flex: 1; }
 .profile-item {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
   padding: .6rem .9rem; background: var(--bg-3); border: 0.5px solid var(--line);
-  border-radius: var(--r); cursor: pointer; transition: all .15s;
+  border-radius: var(--r); cursor: pointer; transition: all .15s; flex-shrink: 0;
+  -webkit-app-region: no-drag;
 }
 .profile-item:hover { border-color: var(--line-s); background: var(--bg-4); }
 .profile-item.active { border-color: var(--accent); }
 .profile-item-name { font-size: 12px; font-weight: 500; }
 .profile-item-desc { font-size: 10px; color: var(--text-3); margin-top: 2px; }
-.profile-item-check { color: var(--accent); font-size: 13px; }
-.modal-actions { display: flex; gap: .5rem; justify-content: flex-end; }
+.profile-item-check { color: var(--accent); font-size: 13px; flex-shrink: 0; }
+.profile-item-builtIn { font-size: 8px; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); background: var(--bg-4); border: 0.5px solid var(--line); border-radius: 99px; padding: 2px 6px; flex-shrink: 0; }
+.profile-item-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.profile-icon-btn {
+  width: 24px; height: 24px; border-radius: 6px; border: 0.5px solid var(--line);
+  background: var(--bg-4); color: var(--text-3); font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s;
+  -webkit-app-region: no-drag;
+}
+.profile-icon-btn:hover { background: var(--bg-hover); color: var(--text-1); border-color: var(--line-s); }
+.profile-icon-btn.del:hover { background: var(--red-bg); border-color: var(--red-b); color: var(--red); }
+.profile-view { display: none; flex-direction: column; gap: .7rem; }
+.profile-view.active { display: flex; flex: 1; min-height: 0; flex-direction: column; gap: .7rem; }
+.profile-list { display: flex; flex-direction: column; gap: .4rem; margin-bottom: .5rem; overflow-y: auto; max-height: 280px; }
+.pf-label { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+.pf-input {
+  width: 100%; padding: 7px 10px;
+  font-size: 12px; font-family: 'DM Sans', sans-serif;
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); color: var(--text-1); outline: none;
+  transition: border-color .15s;
+  -webkit-app-region: no-drag;
+}
+.pf-input:focus { border-color: var(--line-s); }
+textarea.pf-input { resize: none; height: 56px; font-size: 11px; line-height: 1.5; }
+.pf-snapshot {
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); padding: .65rem .9rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: .25rem .5rem;
+}
+.pf-snap-row { display: flex; justify-content: space-between; font-size: 10px; padding: 2px 0; }
+.pf-snap-lbl { color: var(--text-3); }
+.pf-snap-val { font-family: 'DM Mono', monospace; color: var(--text-2); }
+.profile-empty {
+  padding: 1.2rem; text-align: center; color: var(--text-3); font-size: 11px;
+  background: var(--bg-3); border: 0.5px dashed var(--line-s); border-radius: var(--r);
+  line-height: 1.6;
+}
+.modal-actions { display: flex; gap: .5rem; align-items: center; }
+.modal-actions-left { flex: 1; }
 .btn {
   padding: 7px 16px; border-radius: var(--r); font-size: 11px; font-family: 'DM Sans', sans-serif;
   font-weight: 600; cursor: pointer; border: none; transition: all .15s;
+  -webkit-app-region: no-drag;
 }
 .btn-ghost { background: var(--bg-3); border: 0.5px solid var(--line); color: var(--text-2); }
 .btn-ghost:hover { background: var(--bg-4); }
 .btn-primary { background: var(--accent); color: #0f0f0f; }
 .btn-primary:hover { background: var(--accent-d); }
+.btn-danger { background: var(--red-bg); border: 0.5px solid var(--red-b); color: var(--red); }
+.btn-danger:hover { background: rgba(200,74,58,.22); }
+.btn-sm { padding: 5px 11px; font-size: 10px; }
+.modal-divider { height: 0.5px; background: var(--line); margin: .2rem 0; }
+
+/* ── USER PROFILE TABS + STATS ── */
+.up-tabs {
+  display: flex; gap: 3px;
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); padding: 3px; margin-bottom: .85rem;
+  -webkit-app-region: no-drag;
+}
+.up-tab {
+  flex: 1; padding: 5px 0; border: none; background: transparent;
+  font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 600;
+  letter-spacing: .04em; color: var(--text-3); cursor: pointer;
+  border-radius: 7px; transition: background .15s, color .15s;
+  -webkit-app-region: no-drag;
+}
+.up-tab.active { background: var(--bg-4); color: var(--text-1); }
+.up-panel { display: none; flex-direction: column; gap: .6rem; }
+.up-panel.active { display: flex; }
+.up-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.up-stat-card {
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); padding: .7rem .8rem;
+  display: flex; align-items: flex-start; gap: .55rem;
+}
+.up-stat-icon { font-size: 16px; line-height: 1; margin-top: 1px; flex-shrink: 0; }
+.up-stat-body { flex: 1; min-width: 0; }
+.up-stat-val {
+  font-family: 'DM Mono', monospace; font-size: 16px; font-weight: 600;
+  letter-spacing: -.02em; color: var(--text-1); line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.up-stat-lbl { font-size: 9px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); margin-top: 3px; }
+.up-stat-sub { font-size: 9px; color: var(--text-3); margin-top: 1px; line-height: 1.4; }
+.up-chart-card {
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); padding: .8rem .9rem;
+}
+.up-chart-hd { display: flex; align-items: baseline; justify-content: space-between; gap: .5rem; }
+.up-chart-title { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); }
+.up-chart-sub { font-size: 9px; color: var(--text-3); }
+.up-chart-footer { display: flex; justify-content: space-between; align-items: center; margin-top: .4rem; }
+
+/* ── ADD TO PROFILE BUTTON ── */
+.add-to-profile-btn {
+  width: 100%;
+  padding: 8px 14px;
+  background: rgba(200,181,96,.1);
+  border: 0.5px solid rgba(200,181,96,.3);
+  border-radius: var(--r);
+  font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: background .15s, border-color .15s;
+  letter-spacing: .02em;
+  -webkit-app-region: no-drag;
+}
+.add-to-profile-btn:hover {
+  background: rgba(200,181,96,.18);
+  border-color: rgba(200,181,96,.5);
+}
+.add-to-profile-btn.added {
+  background: var(--green-bg);
+  border-color: var(--green-b);
+  color: var(--green);
+}
+
+/* ── ADD DEAL MODAL ── */
+.add-deal-modal {
+  background: var(--bg-2); border: 0.5px solid var(--line-s);
+  border-radius: var(--r-xl); padding: 1.5rem;
+  width: 400px; max-width: 95vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  -webkit-app-region: no-drag;
+}
+.add-deal-title { font-size: 15px; font-family: 'Instrument Serif', serif; margin-bottom: .25rem; }
+.add-deal-sub { font-size: 11px; color: var(--text-2); margin-bottom: 1rem; }
+.add-deal-snapshot {
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); padding: .8rem 1rem; margin-bottom: 1rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: .3rem .6rem;
+}
+.add-deal-row { display: flex; justify-content: space-between; font-size: 11px; padding: 2px 0; }
+.add-deal-lbl { color: var(--text-3); }
+.add-deal-val { font-family: 'DM Mono', monospace; color: var(--text-2); }
+.add-deal-field { margin-bottom: .8rem; }
+.add-deal-field-label { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-3); margin-bottom: 5px; }
+.add-deal-input {
+  width: 100%; padding: 8px 10px;
+  font-size: 12px; font-family: 'DM Sans', sans-serif;
+  background: var(--bg-3); border: 0.5px solid var(--line);
+  border-radius: var(--r); color: var(--text-1); outline: none;
+  transition: border-color .15s;
+  -webkit-app-region: no-drag;
+}
+.add-deal-input:focus { border-color: var(--line-s); }
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
@@ -479,9 +747,13 @@ input[type=range] { cursor: pointer; }
   <div class="top-bar">
     <div class="mode-toggle">
       <button class="mode-btn active" id="btnSimple" onclick="setMode('simple')">Simple</button>
-      <button class="mode-btn"        id="btnPro"    onclick="setMode('pro')">Pro</button>
+      <button class="mode-btn"        id="btnPro"    onclick="setMode('pro')">Pro <span class="pro-badge">PRO</span></button>
     </div>
     <button class="profile-btn" onclick="openProfiles()">⚙ Profiles</button>
+    <button class="user-avatar-btn" id="userAvatarBtn" onclick="openUserProfile()">
+      <div class="user-avatar-circle" id="topAvatarCircle">?</div>
+      <span class="user-avatar-name" id="topAvatarName">Profile</span>
+    </button>
   </div>
 
   <div class="sb-sections">
@@ -558,9 +830,9 @@ input[type=range] { cursor: pointer; }
       <div class="sb-section-body">
         <div class="toggle-row" style="margin-bottom:.55rem">
           <span class="toggle-label">Enable financing model</span>
-          <label class="sw"><input type="checkbox" id="finEnabled" onchange="calc()"><span class="sw-track"></span></label>
+          <label class="sw"><input type="checkbox" id="finEnabled" onchange="updateFinFields(); calc()"><span class="sw-track"></span></label>
         </div>
-        <div id="finFields">
+        <div id="finFields" style="opacity:.35;pointer-events:none;transition:opacity .2s">
           <div class="field-grid">
             <div class="field">
               <div class="fl">Loan Amount <span class="tip">?<span class="tip-b">Total borrowed: purchase + rehab if using a hard-money loan, or just purchase for conventional.</span></span></div>
@@ -578,7 +850,7 @@ input[type=range] { cursor: pointer; }
             </div>
             <div class="field">
               <div class="fl">Type</div>
-              <select id="loanType" onchange="calc()" style="width:100%;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:var(--bg-3);border:0.5px solid var(--line);border-radius:var(--r);color:var(--text-1);outline:none;">
+              <select id="loanType" onchange="calc()" style="width:100%;padding:7px 9px;font-size:11px;font-family:'DM Sans',sans-serif;background:var(--bg-3);border:0.5px solid var(--line);border-radius:var(--r);color:var(--text-1);outline:none;-webkit-app-region:no-drag;">
                 <option value="io">Interest-Only</option>
                 <option value="am">Amortizing</option>
               </select>
@@ -700,19 +972,16 @@ input[type=range] { cursor: pointer; }
     </div>
 
     <div class="offer-boxes">
-      <!-- Conservative -->
       <div class="offer-box" id="offerCBox">
         <div class="offer-box-lbl">Conservative</div>
         <div class="offer-box-val" id="offerCVal">—</div>
         <div class="offer-box-note" id="offerCNote">Guarantees target profit after buffer</div>
       </div>
-      <!-- ROI Target -->
       <div class="offer-box" id="offerRBox">
         <div class="offer-box-lbl">ROI Target</div>
         <div class="offer-box-val" id="offerRVal">—</div>
         <div class="offer-box-note" id="offerRNote">Hits target ROI</div>
       </div>
-      <!-- Aggressive -->
       <div class="offer-box" id="offerABox">
         <div class="offer-box-lbl">Aggressive <span class="tip">?<span class="tip-b">No contingency buffer, no overrun reserve. Only for highly experienced investors with strong market knowledge.</span></span></div>
         <div class="offer-box-val" id="offerAVal">—</div>
@@ -720,7 +989,6 @@ input[type=range] { cursor: pointer; }
       </div>
     </div>
 
-    <!-- Safety buffer slider -->
     <div class="buf-row">
       <span class="buf-label">Safety buffer:</span>
       <input type="range" class="buf-slider" id="safeBuf" min="0" max="25" step="5" value="10" oninput="updateBufLabel(); calc()">
@@ -803,121 +1071,234 @@ input[type=range] { cursor: pointer; }
 </main>
 </div>
 
-<!-- ── PROFILE MODAL ── -->
+<!-- ── ASSUMPTION PROFILES MODAL ── -->
 <div class="modal-bg" id="profileModal">
   <div class="modal">
     <div class="modal-title">Assumption Profiles</div>
-    <div class="modal-sub">Saved cost structures. Select a profile to load its defaults.</div>
-    <div class="profile-list" id="profileList"></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeProfiles()">Cancel</button>
-      <button class="btn btn-primary" onclick="applyProfile()">Apply Profile</button>
+    <div class="modal-sub" id="profileModalSub">Saved cost structures — select to apply, or save the current inputs as a new profile.</div>
+
+    <div class="profile-view active" id="pv-list">
+      <div class="profile-list" id="profileList"></div>
+      <div class="modal-divider"></div>
+      <div class="modal-actions">
+        <div class="modal-actions-left">
+          <button class="btn btn-ghost btn-sm" onclick="profileNav('create')">+ Save current as profile</button>
+        </div>
+        <button class="btn btn-ghost" onclick="closeProfiles()">Cancel</button>
+        <button class="btn btn-primary" id="applyProfileBtn" onclick="applyProfile()">Apply</button>
+      </div>
+    </div>
+
+    <div class="profile-view" id="pv-create">
+      <div class="pf-field">
+        <div class="pf-label">Profile Name</div>
+        <input class="pf-input" type="text" id="pfNameInput" maxlength="40" placeholder="e.g. My Hard Money Deal">
+      </div>
+      <div class="pf-field">
+        <div class="pf-label">Description <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-3);font-size:9px">optional</span></div>
+        <textarea class="pf-input" id="pfDescInput" maxlength="100" placeholder="Brief note about this profile's assumptions…"></textarea>
+      </div>
+      <div class="pf-field">
+        <div class="pf-label">Captured from current inputs</div>
+        <div class="pf-snapshot" id="pfSnapshot"></div>
+      </div>
+      <div class="modal-actions">
+        <div class="modal-actions-left">
+          <button class="btn btn-ghost btn-sm" onclick="profileNav('list')">← Back</button>
+        </div>
+        <button class="btn btn-primary" onclick="saveNewProfile()">Save Profile</button>
+      </div>
+    </div>
+
+    <div class="profile-view" id="pv-edit">
+      <div class="pf-field">
+        <div class="pf-label">Profile Name</div>
+        <input class="pf-input" type="text" id="pfEditNameInput" maxlength="40">
+      </div>
+      <div class="pf-field">
+        <div class="pf-label">Description</div>
+        <textarea class="pf-input" id="pfEditDescInput" maxlength="100"></textarea>
+      </div>
+      <div class="pf-field">
+        <div class="pf-label">Settings snapshot</div>
+        <div class="pf-snapshot" id="pfEditSnapshot"></div>
+      </div>
+      <div class="modal-actions">
+        <div class="modal-actions-left">
+          <button class="btn btn-ghost btn-sm" onclick="profileNav('list')">← Back</button>
+        </div>
+        <button class="btn btn-primary" onclick="saveEditProfile()">Save Changes</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── ADD DEAL TO PROFILE MODAL ── -->
+<div class="modal-bg" id="addDealModal">
+  <div class="add-deal-modal">
+    <div class="add-deal-title">Add Deal to Portfolio</div>
+    <div class="add-deal-sub">Save this deal's results to your profile stats and growth chart.</div>
+    <div class="add-deal-snapshot" id="addDealSnapshot"></div>
+    <div class="add-deal-field">
+      <div class="add-deal-field-label">Deal Label <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-3);font-size:9px">optional</span></div>
+      <input class="add-deal-input" type="text" id="addDealLabel" maxlength="50" placeholder="e.g. 123 Maple St, Detroit">
+    </div>
+    <div class="modal-actions" style="margin-top:.2rem">
+      <div class="modal-actions-left"></div>
+      <button class="btn btn-ghost" onclick="closeAddDealModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmAddDeal()">✚ Add to Profile</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── USER PROFILE MODAL ── -->
+<div class="modal-bg" id="userProfileModal">
+  <div class="user-modal">
+
+    <div class="user-modal-header">
+      <div class="user-modal-avatar-lg" id="modalAvatarLg">?</div>
+      <div class="user-modal-title-area">
+        <div class="user-modal-title" id="modalDisplayName">Your Profile</div>
+        <div class="user-modal-subtitle" id="modalBioPreview">Customize your ArvoSettle profile</div>
+      </div>
+    </div>
+
+    <div class="up-tabs">
+      <button class="up-tab active" id="uptab-stats"  onclick="upTabSwitch('stats')">📊 Stats</button>
+      <button class="up-tab"        id="uptab-edit"   onclick="upTabSwitch('edit')">✏ Edit Profile</button>
+    </div>
+
+    <div class="up-panel active" id="uppanel-stats">
+
+      <div class="up-stat-grid">
+        <div class="up-stat-card">
+          <div class="up-stat-icon">⚡</div>
+          <div class="up-stat-body">
+            <div class="up-stat-val" id="statVelocity">—</div>
+            <div class="up-stat-lbl">Underwriting Velocity</div>
+            <div class="up-stat-sub" id="statVelocitySub">avg. per deal</div>
+          </div>
+        </div>
+        <div class="up-stat-card">
+          <div class="up-stat-icon">🔢</div>
+          <div class="up-stat-body">
+            <div class="up-stat-val" id="statTotalCalcs">0</div>
+            <div class="up-stat-lbl">Total Calculations</div>
+            <div class="up-stat-sub" id="statCalcSub">since you started</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="up-stat-grid">
+        <div class="up-stat-card">
+          <div class="up-stat-icon">🛡</div>
+          <div class="up-stat-body">
+            <div class="up-stat-val" id="statMoneySaved" style="color:var(--green)">$0</div>
+            <div class="up-stat-lbl">Losses Avoided</div>
+            <div class="up-stat-sub">on D-grade deals walked away from</div>
+          </div>
+        </div>
+        <div class="up-stat-card">
+          <div class="up-stat-icon">📋</div>
+          <div class="up-stat-body">
+            <div class="up-stat-val" id="statProfileApplies">0</div>
+            <div class="up-stat-lbl">Profiles Applied</div>
+            <div class="up-stat-sub">assumption shortcuts used</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="up-chart-card">
+        <div class="up-chart-hd">
+          <span class="up-chart-title">Portfolio Growth</span>
+          <span class="up-chart-sub" id="chartSub">Net profit across added deals</span>
+        </div>
+        <canvas id="profitChart" height="90" style="width:100%;display:block;margin-top:.5rem"></canvas>
+        <div class="up-chart-footer">
+          <span id="chartTotalProfit" style="color:var(--green);font-family:'DM Mono',monospace;font-size:11px;font-weight:600"></span>
+          <span id="chartDealCount"   style="color:var(--text-3);font-size:10px"></span>
+        </div>
+      </div>
+
+      <button class="add-to-profile-btn" id="addToProfileBtn" onclick="openAddDealModal()">
+        <span>✚</span> Add Current Deal to Profile
+      </button>
+
+    </div>
+
+    <div class="up-panel" id="uppanel-edit">
+      <div class="user-field">
+        <div class="user-label">Display Name</div>
+        <input class="user-input" type="text" id="userNameInput" maxlength="40" placeholder="e.g. Jordan Chen" oninput="onUserNameType()">
+        <div class="filter-msg" id="nameFilterMsg"></div>
+      </div>
+      <div class="user-field">
+        <div class="user-label">Bio <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-3);font-size:9px">optional</span></div>
+        <textarea class="user-input" id="userBioInput" maxlength="180" placeholder="e.g. Real estate investor in Toronto. 10+ flips completed. Focus on value-add multifamily." oninput="onUserBioType()"></textarea>
+        <div class="user-char-count"><span id="bioCharCount">0</span> / 180</div>
+        <div class="filter-msg" id="bioFilterMsg"></div>
+      </div>
+      <div class="save-status" id="saveStatus">✓ Profile saved!</div>
+    </div>
+
+    <div class="modal-actions" style="margin-top:.9rem">
+      <div class="modal-actions-left">
+        <button class="btn btn-danger btn-sm" onclick="confirmResetProfile()">↺ Reset Profile</button>
+      </div>
+      <button class="btn btn-ghost" onclick="closeUserProfile()">Close</button>
+      <button class="btn btn-primary" id="saveProfileBtn" onclick="saveUserProfile()" style="display:none">Save Profile</button>
     </div>
   </div>
 </div>
 
 <script>
-// ════════════════════════════════════════════
-// STATE
-// ════════════════════════════════════════════
 var state = {
   mode: 'simple',
   arvMode: 'base',
-  selectedProfile: null
+  selectedProfile: null,
+  user: { name: '', bio: '' },
+  stats: {
+    totalCalcs: 0,
+    calcTimestamps: [],
+    dealLog: [],        // ONLY populated via "Add Current Deal to Profile" button
+    moneySaved: 0,
+    profileApplyCount: 0
+  }
 };
 
-// ════════════════════════════════════════════
-// PROFILES
-// Addresses issue #1: editable assumption profiles
-// ════════════════════════════════════════════
-var PROFILES = [
-  {
-    id: 'standard',
-    name: 'Standard Flip',
-    desc: '6% sell / 3% close / 4-month hold / 10% overrun',
-    closing: 3, selling: 6, months: 4, monthly: 0,
-    overrun: 10, delayBuf: 1,
-    finEnabled: false, loanAmt: 0, intRate: 10, points: 2, loanType: 'io', amTerm: 30
-  },
-  {
-    id: 'hard-money',
-    name: 'Hard Money Financed',
-    desc: '10% rate / 2pts / IO / 6% sell / 3% close',
-    closing: 3, selling: 6, months: 5, monthly: 500,
-    overrun: 15, delayBuf: 1,
-    finEnabled: true, loanAmt: 225000, intRate: 10, points: 2, loanType: 'io', amTerm: 30
-  },
-  {
-    id: 'conservative',
-    name: 'Conservative Underwrite',
-    desc: '7% sell / 4% close / 25% overrun / 2-month buffer',
-    closing: 4, selling: 7, months: 6, monthly: 800,
-    overrun: 25, delayBuf: 2,
-    finEnabled: false, loanAmt: 0, intRate: 12, points: 3, loanType: 'io', amTerm: 30
-  },
-  {
-    id: 'brrrr-profile',
-    name: 'BRRRR Refinance',
-    desc: 'Long hold / amortizing / lower sell costs',
-    closing: 3.5, selling: 3, months: 8, monthly: 1200,
-    overrun: 15, delayBuf: 2,
-    finEnabled: true, loanAmt: 140000, intRate: 7.5, points: 1, loanType: 'am', amTerm: 30
-  }
-];
+var lastScenario = null;
+var lastInputs   = null;
+var lastGrade    = null;
 
-// ════════════════════════════════════════════
-// PRESETS
-// ════════════════════════════════════════════
 var PRESETS = {
   cosmetic: { purchase:180000, arv:240000, rehab:12000, holding:3500, desired:20000 },
   full:     { purchase:250000, arv:380000, rehab:55000, holding:8000, desired:35000 },
   brrrr:    { purchase:120000, arv:195000, rehab:35000, holding:5000, desired:15000 }
 };
 
-// ════════════════════════════════════════════
-// HELPERS
-// ════════════════════════════════════════════
 function c$(id){ return document.getElementById(id); }
 function g(id){ return parseFloat(c$(id).value) || 0; }
 function gStr(id){ return c$(id).value; }
 function money(n){ return '$' + Math.abs(Math.round(n)).toLocaleString('en-US'); }
 function pct(n){   return (Math.round(n * 10) / 10) + '%'; }
-
-// Issue #2 fix: no '+' prefix, clean money format
-function fmt(n){
-  return (n < 0 ? '-$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US');
-}
-
+function fmt(n){ return (n < 0 ? '-$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US'); }
 function threeColor(val, good, warn){
   if(val >= good) return 'var(--green)';
   if(val >= warn) return 'var(--yellow)';
   return 'var(--red)';
 }
 
-// ════════════════════════════════════════════
-// FINANCING MODEL
-// Issue #3: full loan model — IO and amortizing, with points
-// ════════════════════════════════════════════
-/**
- * Returns total financing cost over the hold period.
- * - Interest-only: monthly interest * months
- * - Amortizing: sum of interest portion over hold months
- * - Plus upfront points
- */
 function computeFinancingCost(loanAmt, annualRate, points, loanType, amTerm, months){
   if(!loanAmt || loanAmt <= 0) return 0;
   var monthlyRate = annualRate / 100 / 12;
   var pointsCost  = loanAmt * (points / 100);
   var interestCost = 0;
-
   if(loanType === 'io'){
-    // Interest-only: flat monthly interest
     interestCost = loanAmt * monthlyRate * months;
   } else {
-    // Amortizing: P&I payment, extract only interest portion
-    if(monthlyRate === 0){
-      interestCost = 0;
-    } else {
+    if(monthlyRate === 0){ interestCost = 0; }
+    else {
       var n = amTerm * 12;
       var payment = loanAmt * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
       var balance = loanAmt;
@@ -932,9 +1313,6 @@ function computeFinancingCost(loanAmt, annualRate, points, loanType, amTerm, mon
   return pointsCost + interestCost;
 }
 
-// ════════════════════════════════════════════
-// GRADE
-// ════════════════════════════════════════════
 function computeGrade(roi, margin){
   var s = 0;
   if(roi >= 25) s += 45; else if(roi >= 15) s += 35; else if(roi >= 8) s += 20; else if(roi > 0) s += 8;
@@ -947,100 +1325,53 @@ function computeGrade(roi, margin){
   return             { l:'D', txt:'Walk Away', bg:'var(--red-bg)',   clr:'var(--red)',   b:'var(--red-b)' };
 }
 
-// ════════════════════════════════════════════
-// CORE CALCULATION
-// Accepts an arvFactor and optional overrides (for scenarios)
-// ════════════════════════════════════════════
 function computeScenario(baseInputs, arvFactor){
   var effectiveArv = baseInputs.rawArv * arvFactor;
   var closingAmt   = baseInputs.purchase * (baseInputs.closingPct / 100);
   var sellingAmt   = effectiveArv * (baseInputs.sellingPct / 100);
   var carrying     = baseInputs.months * baseInputs.monthly;
-  // Issue #2 fix: model delay buffer separately
   var delayCarry   = baseInputs.delayBuf * baseInputs.monthly;
-  // Issue #2 fix: model rehab overrun separately
   var rehabOverrun = baseInputs.rehab * (baseInputs.overrunPct / 100);
   var totalRehab   = baseInputs.rehab + rehabOverrun;
-  // Financing
   var finCost = baseInputs.finEnabled
     ? computeFinancingCost(baseInputs.loanAmt, baseInputs.intRate, baseInputs.points, baseInputs.loanType, baseInputs.amTerm, baseInputs.months + baseInputs.delayBuf)
     : 0;
-
   var totalCosts = baseInputs.purchase + totalRehab + baseInputs.holding + closingAmt + sellingAmt + carrying + delayCarry + finCost;
   var profit      = effectiveArv - totalCosts;
   var totalInvest = baseInputs.purchase + totalRehab + baseInputs.holding + closingAmt + carrying + delayCarry + finCost;
   var roi         = totalInvest > 0 ? (profit / totalInvest) * 100 : 0;
   var margin      = effectiveArv > 0 ? (profit / effectiveArv) * 100 : 0;
-
-  return {
-    effectiveArv, closingAmt, sellingAmt, carrying, delayCarry,
-    rehabOverrun, totalRehab, finCost, totalCosts,
-    profit, totalInvest, roi, margin
-  };
+  return { effectiveArv, closingAmt, sellingAmt, carrying, delayCarry, rehabOverrun, totalRehab, finCost, totalCosts, profit, totalInvest, roi, margin };
 }
 
-// ════════════════════════════════════════════
-// ARV BREAK-EVEN (renamed + Infinity guard)
-// Solves: ARV required for zero profit at current cost structure.
-// ════════════════════════════════════════════
 function computeArvBreakEven(baseInputs, totalFixedCosts, sellingPct){
   var selFrac = sellingPct / 100;
   if(selFrac >= 1) return Infinity;
-  // totalFixedCosts = purchase + rehab + holding + closing + carry + fin (no selling)
   return totalFixedCosts / (1 - selFrac);
 }
 
-// ════════════════════════════════════════════
-// OFFER CALCULATIONS
-// Issue #2 fix: safety buffer slider, overrun-aware conservative offer
-// ════════════════════════════════════════════
 function computeOffers(baseInputs, sc){
   var bufPct = g('safeBuf') / 100;
-  // Conservative: backs out desired profit AND a safety buffer % of total costs
   var safetyBuffer = sc.totalCosts * bufPct;
   var conservative = sc.effectiveArv - sc.totalCosts - baseInputs.desired - safetyBuffer + baseInputs.purchase;
-  // ROI target
-  var targetRoiOffer = sc.effectiveArv / (1 + (baseInputs.targetRoi / 100))
-    - (sc.totalRehab + baseInputs.holding + sc.sellingAmt + sc.carrying + sc.delayCarry + sc.finCost + sc.closingAmt - sc.closingAmt); // keep purchase variable
-  // Simpler formulation: work backwards
-  // profit = arv - (P + rehab + hold + close(P) + sell(arv) + carry + fin)
-  // roi = profit / (P + rehab + hold + close(P) + carry + fin)
-  // Let fixed = rehab + hold + sell(arv) + carry + fin
-  // roi * (P*(1+closePct) + fixed) = arv - P*(1+closePct) - fixed
-  // Let cp = 1 + closingPct/100
-  // roi*P*cp + roi*fixed = arv - P*cp - fixed
-  // P*cp*(1+roi) = arv - fixed*(1+roi)
-  // P = (arv - fixed*(1+roi)) / (cp*(1+roi))
   var cp = 1 + baseInputs.closingPct / 100;
   var roi = baseInputs.targetRoi / 100;
   var fixed = sc.totalRehab + baseInputs.holding + sc.sellingAmt + sc.carrying + sc.delayCarry + sc.finCost;
   var roiOffer = (sc.effectiveArv - fixed * (1 + roi)) / (cp * (1 + roi));
-  // Aggressive: no buffer, no overrun, no delay — plain MAO
   var aggressiveFixed = baseInputs.rehab + baseInputs.holding + baseInputs.purchase * (baseInputs.closingPct/100) + sc.sellingAmt + sc.carrying + sc.finCost;
   var aggressive = sc.effectiveArv - aggressiveFixed - baseInputs.desired;
-
   return { conservative, roiOffer, aggressive };
 }
 
-// ════════════════════════════════════════════
-// VALIDATION
-// Issue #3 fix: compute state first, apply once
-// ════════════════════════════════════════════
 function validateInputs(inp){
   var arvState = '', arvMsg = '';
   if(inp.effectiveArv > 0 && inp.purchase > 0){
-    if(inp.effectiveArv <= inp.purchase){
-      arvState = 'error'; arvMsg = 'ARV should exceed purchase price';
-    } else if(inp.effectiveArv < inp.purchase * 1.1){
-      arvState = 'warn'; arvMsg = 'ARV is less than 10% above purchase — thin margin';
-    }
+    if(inp.effectiveArv <= inp.purchase){ arvState = 'error'; arvMsg = 'ARV should exceed purchase price'; }
+    else if(inp.effectiveArv < inp.purchase * 1.1){ arvState = 'warn'; arvMsg = 'ARV is less than 10% above purchase — thin margin'; }
   }
   setFS('arv', arvState, arvMsg);
-
   var rehabState = '', rehabMsg = '';
-  if(inp.effectiveArv > 0 && inp.rehab > inp.effectiveArv * 0.5){
-    rehabState = 'warn'; rehabMsg = 'Rehab exceeds 50% of ARV — verify estimate';
-  }
+  if(inp.effectiveArv > 0 && inp.rehab > inp.effectiveArv * 0.5){ rehabState = 'warn'; rehabMsg = 'Rehab exceeds 50% of ARV — verify estimate'; }
   setFS('rehab', rehabState, rehabMsg);
 }
 
@@ -1053,13 +1384,9 @@ function setFS(id, st, msg){
   if(me){ me.className = 'field-msg' + (st ? ' show ' + st : ''); me.textContent = msg; }
 }
 
-// ════════════════════════════════════════════
-// RENDER
-// ════════════════════════════════════════════
 function renderUI(inp, sc, offers, grade, breakEven){
   var { profit, roi, margin, effectiveArv } = sc;
 
-  /* Verdict */
   var v = c$('verdict'), em = c$('verdictEmoji'), vt = c$('verdictTxt'), vs = c$('verdictSub');
   if(roi >= 20 && profit >= inp.desired){
     v.style.cssText = 'background:var(--green-bg);border-color:var(--green-b)';
@@ -1075,29 +1402,24 @@ function renderUI(inp, sc, offers, grade, breakEven){
     vs.textContent = 'Negative or insufficient return at this price. Pass or renegotiate significantly.';
   }
 
-  /* Hero */
   var hc = profit >= 0 ? 'var(--green)' : 'var(--red)';
   c$('heroVal').textContent = fmt(profit); c$('heroVal').style.color = hc;
   c$('heroLbl').style.color = hc; c$('heroBar').style.background = hc;
 
-  /* ROI */
   var rc = threeColor(roi, 20, 10);
   c$('roiVal').textContent = pct(roi); c$('roiVal').style.color = rc;
   c$('roiSub').textContent = roi >= 20 ? 'Strong return' : roi >= 10 ? 'Moderate return' : roi > 0 ? 'Low return' : 'Negative';
   c$('roiSub').style.color = rc;
 
-  /* Grade */
   c$('gradeVal').textContent = grade.l; c$('gradeVal').style.color = grade.clr;
   var badge = c$('gradeBadge');
   badge.style.cssText = 'background:' + grade.bg + ';color:' + grade.clr + ';border-color:' + grade.b;
   badge.textContent = 'Grade ' + grade.l + ' · ' + grade.txt;
 
-  /* Margin */
   var mc = threeColor(margin, 15, 8);
   c$('marginVal').textContent = pct(margin); c$('marginVal').style.color = mc;
   c$('marginSub').style.color = mc;
 
-  /* Insight — break-even */
   var ins = c$('insightTxt');
   if(breakEven === Infinity){
     ins.innerHTML = 'Selling costs are <strong>≥ 100% of ARV</strong> — this deal cannot break even under any ARV.';
@@ -1113,7 +1435,6 @@ function renderUI(inp, sc, offers, grade, breakEven){
     ins.textContent = 'Enter your deal numbers to see the ARV break-even insight.';
   }
 
-  /* Offers */
   function renderBox(boxId, valId, noteId, val, noteStr){
     var box = c$(boxId), velEl = c$(valId), noteEl = c$(noteId);
     if(val <= 0){
@@ -1131,7 +1452,6 @@ function renderUI(inp, sc, offers, grade, breakEven){
   renderBox('offerRBox','offerRVal','offerRNote', offers.roiOffer, 'Targets ' + inp.targetRoi + '% ROI');
   renderBox('offerABox','offerAVal', null, offers.aggressive, '');
 
-  /* Breakdown */
   c$('bPurchase').textContent = '-' + money(inp.purchase);
   c$('bRehab').textContent    = '-' + money(inp.rehab);
   var hasOverrun = sc.rehabOverrun > 0;
@@ -1155,7 +1475,6 @@ function renderUI(inp, sc, offers, grade, breakEven){
   var bp = c$('bProfit');
   bp.textContent = fmt(profit); bp.style.color = profit >= 0 ? 'var(--green)' : 'var(--red)';
 
-  /* Risk scenarios */
   ['bull','base','bear'].forEach(function(s){
     var f = s === 'bull' ? 1.07 : s === 'bear' ? 0.90 : 1.00;
     var sc2 = computeScenario(inp, f);
@@ -1166,7 +1485,6 @@ function renderUI(inp, sc, offers, grade, breakEven){
     c$('rs-' + s + '-profit').style.color = sc2.profit >= 0 ? 'var(--green)' : 'var(--red)';
   });
 
-  /* Assumptions chips */
   c$('asmSelling').textContent = inp.sellingPct + '% selling';
   c$('asmClosing').textContent = inp.closingPct + '% closing';
   c$('asmMonths').textContent  = inp.months + '-month hold' + (inp.delayBuf > 0 ? ' +' + inp.delayBuf + 'mo buffer' : '');
@@ -1175,9 +1493,6 @@ function renderUI(inp, sc, offers, grade, breakEven){
   c$('asmOverrun').textContent = inp.overrunPct + '% rehab overrun reserve';
 }
 
-// ════════════════════════════════════════════
-// MAIN ORCHESTRATOR
-// ════════════════════════════════════════════
 function calc(){
   var rawArv    = g('arv');
   var arvFactor = state.arvMode === 'bear' ? 0.90 : state.arvMode === 'bull' ? 1.07 : 1.00;
@@ -1197,7 +1512,6 @@ function calc(){
     monthly:     g('monthly'),
     overrunPct:  isPro ? g('overrun') : 0,
     delayBuf:    isPro ? g('delayBuf') : 0,
-    // Financing — issue #3
     finEnabled:  isPro && finOn,
     loanAmt:     g('loanAmt'),
     intRate:     g('intRate'),
@@ -1208,85 +1522,269 @@ function calc(){
   };
 
   validateInputs(inp);
-
   var sc      = computeScenario(inp, arvFactor);
   var offers  = computeOffers(inp, sc);
   var grade   = computeGrade(sc.roi, sc.margin);
-
-  // Break-even fixed costs (excluding selling, which scales with ARV)
   var fixedNonSell = inp.purchase * (1 + inp.closingPct / 100) + sc.totalRehab + inp.holding + sc.carrying + sc.delayCarry + sc.finCost;
   var breakEven = computeArvBreakEven(inp, fixedNonSell, inp.sellingPct);
-
   renderUI(inp, sc, offers, grade, breakEven);
+
+  lastScenario = sc;
+  lastInputs   = inp;
+  lastGrade    = grade;
+
+  // Track calculation count and timestamps for velocity stat only
+  // Deal log is ONLY updated via the "Add Current Deal to Profile" button
+  var now = Date.now();
+  state.stats.totalCalcs++;
+  state.stats.calcTimestamps.push(now);
+  saveStats();
 }
 
-// ════════════════════════════════════════════
-// PROFILE MODAL
-// ════════════════════════════════════════════
+function openAddDealModal(){
+  if(!lastInputs || !lastScenario){ alert('Run a calculation first by entering your deal numbers.'); return; }
+  var snap = c$('addDealSnapshot');
+  var rows = [
+    ['Purchase',   money(lastInputs.purchase)],
+    ['ARV',        money(lastInputs.effectiveArv)],
+    ['Net Profit', fmt(lastScenario.profit)],
+    ['ROI',        pct(lastScenario.roi)],
+    ['Grade',      'Grade ' + lastGrade.l + ' · ' + lastGrade.txt],
+    ['Margin',     pct(lastScenario.margin)],
+  ];
+  snap.innerHTML = rows.map(function(r){
+    var isProfit = r[0] === 'Net Profit';
+    var color = isProfit ? (lastScenario.profit >= 0 ? 'var(--green)' : 'var(--red)') : '';
+    return '<div class="add-deal-row"><span class="add-deal-lbl">' + r[0] + '</span><span class="add-deal-val" style="color:' + color + '">' + r[1] + '</span></div>';
+  }).join('');
+  c$('addDealLabel').value = '';
+  c$('addDealModal').classList.add('show');
+}
+
+function closeAddDealModal(){ c$('addDealModal').classList.remove('show'); }
+
+function confirmAddDeal(){
+  if(!lastInputs || !lastScenario) return;
+  var label = c$('addDealLabel').value.trim() || ('Deal #' + (state.stats.dealLog.length + 1));
+  var now = Date.now();
+  state.stats.dealLog.push({
+    ts: now,
+    profit: lastScenario.profit,
+    grade: lastGrade.l,
+    totalCosts: lastScenario.totalCosts,
+    arv: lastInputs.rawArv,
+    label: label
+  });
+  // Recompute money saved from D-grade deals in the explicit log
+  state.stats.moneySaved = state.stats.dealLog.reduce(function(sum, d){
+    return sum + (d.grade === 'D' ? Math.abs(d.profit) : 0);
+  }, 0);
+  saveStats();
+  closeAddDealModal();
+  var btn = c$('addToProfileBtn');
+  btn.classList.add('added');
+  btn.innerHTML = '<span>✓</span> Deal Added!';
+  setTimeout(function(){ btn.classList.remove('added'); btn.innerHTML = '<span>✚</span> Add Current Deal to Profile'; }, 2000);
+  // Refresh chart if modal is open
+  setTimeout(drawProfitChart, 80);
+}
+
+c$('addDealModal').addEventListener('click', function(e){ if(e.target === c$('addDealModal')) closeAddDealModal(); });
+
+function confirmResetProfile(){
+  var msg = 'Reset your entire profile?\n\nThis will clear:\n• Your display name and bio\n• All stats and calculations\n• Your deal log and portfolio history\n\nThis cannot be undone.';
+  if(!confirm(msg)) return;
+
+  // Reset state
+  state.user = { name: '', bio: '' };
+  state.stats = { totalCalcs: 0, calcTimestamps: [], dealLog: [], moneySaved: 0, profileApplyCount: 0 };
+  lastScenario = null; lastInputs = null; lastGrade = null;
+
+  // Clear localStorage
+  try {
+    localStorage.removeItem('arvosettle_user');
+    localStorage.removeItem('arvosettle_stats');
+  } catch(e){}
+
+  // Reset all edit-panel UI state so inputs work again
+  c$('userNameInput').value = '';
+  c$('userBioInput').value = '';
+  c$('bioCharCount').textContent = '0';
+  c$('userNameInput').classList.remove('input-error');
+  c$('userBioInput').classList.remove('input-error');
+  c$('nameFilterMsg').classList.remove('show');
+  c$('bioFilterMsg').classList.remove('show');
+  c$('saveStatus').classList.remove('show');
+  var btn = c$('saveProfileBtn');
+  btn.classList.remove('btn-saving');
+  btn.textContent = 'Save Profile';
+
+  // Update avatar and stats display
+  updateAvatarUI();
+  renderProfileStats();
+
+  // Stay on stats tab, show confirmation in subtitle
+  upTabSwitch('stats');
+
+  var sub = c$('modalBioPreview');
+  sub.textContent = '✓ Profile reset successfully';
+  sub.style.color = 'var(--green)';
+  setTimeout(function(){ sub.textContent = 'Customize your ArvoSettle profile'; sub.style.color = ''; }, 2500);
+}
+
+var BUILTIN_PROFILES = [
+  { id: 'standard', builtIn: true, name: 'Standard Flip', desc: '6% sell / 3% close / 4-month hold / 10% overrun', closing: 3, selling: 6, months: 4, monthly: 0, overrun: 10, delayBuf: 1, finEnabled: false, loanAmt: 0, intRate: 10, points: 2, loanType: 'io', amTerm: 30 },
+  { id: 'hard-money', builtIn: true, name: 'Hard Money Financed', desc: '10% rate / 2pts / IO / 6% sell / 3% close', closing: 3, selling: 6, months: 5, monthly: 500, overrun: 15, delayBuf: 1, finEnabled: true, loanAmt: 225000, intRate: 10, points: 2, loanType: 'io', amTerm: 30 },
+  { id: 'conservative', builtIn: true, name: 'Conservative Underwrite', desc: '7% sell / 4% close / 25% overrun / 2-month buffer', closing: 4, selling: 7, months: 6, monthly: 800, overrun: 25, delayBuf: 2, finEnabled: false, loanAmt: 0, intRate: 12, points: 3, loanType: 'io', amTerm: 30 },
+  { id: 'brrrr-profile', builtIn: true, name: 'BRRRR Refinance', desc: 'Long hold / amortizing / lower sell costs', closing: 3.5, selling: 3, months: 8, monthly: 1200, overrun: 15, delayBuf: 2, finEnabled: true, loanAmt: 140000, intRate: 7.5, points: 1, loanType: 'am', amTerm: 30 }
+];
+
+var PROFILES = [];
+var pfEditTargetId = null;
+
+function loadProfiles(){
+  var custom = [];
+  try { custom = JSON.parse(localStorage.getItem('arvosettle_profiles') || '[]'); } catch(e){}
+  PROFILES = BUILTIN_PROFILES.concat(custom);
+}
+
+function saveCustomProfiles(){
+  var custom = PROFILES.filter(function(p){ return !p.builtIn; });
+  try { localStorage.setItem('arvosettle_profiles', JSON.stringify(custom)); } catch(e){}
+}
+
+loadProfiles();
+
+function captureCurrentInputs(){
+  return {
+    closing:    parseFloat(c$('closing').value)  || 3,
+    selling:    parseFloat(c$('selling').value)  || 6,
+    months:     parseFloat(c$('months').value)   || 4,
+    monthly:    parseFloat(c$('monthly').value)  || 0,
+    overrun:    parseFloat(c$('overrun').value)  || 10,
+    delayBuf:   parseFloat(c$('delayBuf').value) || 1,
+    finEnabled: c$('finEnabled').checked,
+    loanAmt:    parseFloat(c$('loanAmt').value)  || 0,
+    intRate:    parseFloat(c$('intRate').value)  || 10,
+    points:     parseFloat(c$('points').value)   || 2,
+    loanType:   c$('loanType').value,
+    amTerm:     parseFloat(c$('amTerm').value)   || 30,
+  };
+}
+
+function snapshotHTML(p){
+  var rows = [
+    ['Closing', p.closing + '%'], ['Selling', p.selling + '%'], ['Hold time', p.months + ' mo'],
+    ['Monthly carry', p.monthly ? '$' + p.monthly.toLocaleString() : '—'],
+    ['Overrun reserve', p.overrun + '%'], ['Delay buffer', p.delayBuf + ' mo'],
+    ['Financing', p.finEnabled ? (p.loanType === 'io' ? 'IO ' + p.intRate + '%' : 'Amort ' + p.intRate + '%') : 'None'],
+    ['Loan amount', p.finEnabled && p.loanAmt ? '$' + Math.round(p.loanAmt).toLocaleString() : '—'],
+  ];
+  return rows.map(function(r){ return '<div class="pf-snap-row"><span class="pf-snap-lbl">' + r[0] + '</span><span class="pf-snap-val">' + r[1] + '</span></div>'; }).join('');
+}
+
 function renderProfileList(){
   var list = c$('profileList');
   list.innerHTML = '';
+  if(PROFILES.length === 0){
+    list.innerHTML = '<div class="profile-empty">No profiles yet.<br>Save the current inputs as your first profile.</div>';
+    c$('applyProfileBtn').style.opacity = '.4';
+    return;
+  }
   PROFILES.forEach(function(p){
+    var isActive = state.selectedProfile === p.id;
     var el = document.createElement('div');
-    el.className = 'profile-item' + (state.selectedProfile === p.id ? ' active' : '');
-    el.onclick = function(){ state.selectedProfile = p.id; renderProfileList(); };
-    el.innerHTML = '<div><div class="profile-item-name">' + p.name + '</div><div class="profile-item-desc">' + p.desc + '</div></div>'
-      + (state.selectedProfile === p.id ? '<span class="profile-item-check">✓</span>' : '');
+    el.className = 'profile-item' + (isActive ? ' active' : '');
+    el.addEventListener('click', function(){ profileSelect(p.id); });
+    el.addEventListener('dblclick', function(){ profileSelect(p.id); applyProfile(); });
+    var actionsHTML = p.builtIn
+      ? '<span class="profile-item-builtIn">Built-in</span>'
+      : '<div class="profile-item-actions"><button class="profile-icon-btn" title="Edit" onclick="event.stopPropagation();profileEditOpen(\'' + p.id + '\')">✏</button><button class="profile-icon-btn del" title="Delete" onclick="event.stopPropagation();profileDelete(\'' + p.id + '\')">✕</button></div>';
+    el.innerHTML = '<div style="flex:1;min-width:0;"><div class="profile-item-name">' + p.name + '</div><div class="profile-item-desc">' + (p.desc || '') + '</div></div>' + (isActive ? '<span class="profile-item-check">✓</span>' : '') + actionsHTML;
     list.appendChild(el);
   });
+  c$('applyProfileBtn').style.opacity = state.selectedProfile ? '1' : '.4';
 }
 
-function openProfiles(){ state.selectedProfile = null; renderProfileList(); c$('profileModal').classList.add('show'); }
+function profileSelect(id){ state.selectedProfile = id; renderProfileList(); }
+
+function profileNav(view){
+  ['list','create','edit'].forEach(function(v){ c$('pv-' + v).classList.toggle('active', v === view); });
+  if(view === 'create'){ c$('pfNameInput').value = ''; c$('pfDescInput').value = ''; c$('pfSnapshot').innerHTML = snapshotHTML(captureCurrentInputs()); }
+}
+
+function saveNewProfile(){
+  var name = c$('pfNameInput').value.trim();
+  if(!name){ c$('pfNameInput').focus(); return; }
+  var data = captureCurrentInputs();
+  data.id = 'custom-' + Date.now(); data.name = name;
+  data.desc = c$('pfDescInput').value.trim() || autoDesc(data);
+  data.builtIn = false;
+  PROFILES.push(data);
+  saveCustomProfiles();
+  state.selectedProfile = data.id;
+  profileNav('list'); renderProfileList();
+}
+
+function profileEditOpen(id){
+  var p = PROFILES.find(function(x){ return x.id === id; });
+  if(!p) return;
+  pfEditTargetId = id;
+  c$('pfEditNameInput').value = p.name;
+  c$('pfEditDescInput').value = p.desc || '';
+  c$('pfEditSnapshot').innerHTML = snapshotHTML(p);
+  profileNav('edit');
+}
+
+function saveEditProfile(){
+  var name = c$('pfEditNameInput').value.trim();
+  if(!name){ c$('pfEditNameInput').focus(); return; }
+  var p = PROFILES.find(function(x){ return x.id === pfEditTargetId; });
+  if(!p) return;
+  p.name = name; p.desc = c$('pfEditDescInput').value.trim() || p.desc;
+  saveCustomProfiles(); profileNav('list'); renderProfileList();
+}
+
+function profileDelete(id){
+  if(!confirm('Delete this profile?')) return;
+  PROFILES = PROFILES.filter(function(p){ return p.id !== id; });
+  if(state.selectedProfile === id) state.selectedProfile = null;
+  saveCustomProfiles(); renderProfileList();
+}
+
+function autoDesc(p){
+  var parts = [p.selling + '% sell', p.closing + '% close', p.months + '-mo hold'];
+  if(p.finEnabled) parts.push(p.loanType === 'io' ? 'IO ' + p.intRate + '%' : 'Amort ' + p.intRate + '%');
+  if(p.overrun) parts.push(p.overrun + '% overrun');
+  return parts.join(' / ');
+}
+
+function openProfiles(){ state.selectedProfile = null; loadProfiles(); profileNav('list'); renderProfileList(); c$('profileModal').classList.add('show'); }
 function closeProfiles(){ c$('profileModal').classList.remove('show'); }
 
 function applyProfile(){
   var p = PROFILES.find(function(x){ return x.id === state.selectedProfile; });
   if(!p){ closeProfiles(); return; }
-  c$('closing').value  = p.closing;
-  c$('selling').value  = p.selling;
-  c$('months').value   = p.months;
-  c$('monthly').value  = p.monthly;
-  c$('overrun').value  = p.overrun;
-  c$('delayBuf').value = p.delayBuf;
-  c$('finEnabled').checked = p.finEnabled;
-  c$('loanAmt').value  = p.loanAmt;
-  c$('intRate').value  = p.intRate;
-  c$('points').value   = p.points;
-  c$('loanType').value = p.loanType;
-  c$('amTerm').value   = p.amTerm;
-  updateAmField();
-  setMode('pro');
-  openSection('financing');
-  openSection('risk');
-  closeProfiles();
-  calc();
+  c$('closing').value = p.closing; c$('selling').value = p.selling; c$('months').value = p.months;
+  c$('monthly').value = p.monthly; c$('overrun').value = p.overrun; c$('delayBuf').value = p.delayBuf;
+  c$('finEnabled').checked = p.finEnabled; c$('loanAmt').value = p.loanAmt; c$('intRate').value = p.intRate;
+  c$('points').value = p.points; c$('loanType').value = p.loanType; c$('amTerm').value = p.amTerm;
+  updateAmField(); setMode('pro'); openSection('financing'); openSection('risk'); closeProfiles();
+  state.stats.profileApplyCount++; saveStats(); calc();
 }
+
+function applyProfile_byId(id){ state.selectedProfile = id; applyProfile(); }
 
 c$('profileModal').addEventListener('click', function(e){ if(e.target === c$('profileModal')) closeProfiles(); });
 
-// ════════════════════════════════════════════
-// UI: SECTIONS (collapsible — issue #4 mobile UX)
-// ════════════════════════════════════════════
-function toggleSec(id){
-  var el = c$('sec-' + id);
-  el.classList.toggle('open');
-}
-function openSection(id){
-  c$('sec-' + id).classList.add('open');
-}
+function toggleSec(id){ c$('sec-' + id).classList.toggle('open'); }
+function openSection(id){ c$('sec-' + id).classList.add('open'); }
 
-// ════════════════════════════════════════════
-// UI: MODE
-// ════════════════════════════════════════════
 function setMode(m){
   state.mode = m;
   c$('btnSimple').classList.toggle('active', m === 'simple');
   c$('btnPro').classList.toggle('active', m === 'pro');
-  // Show pro sections
-  var proSecs = ['sec-financing','sec-risk','sec-arv'];
-  proSecs.forEach(function(id){
-    c$(id).style.display = m === 'pro' ? '' : 'none';
-  });
+  ['sec-financing','sec-risk','sec-arv'].forEach(function(id){ c$(id).style.display = m === 'pro' ? '' : 'none'; });
   calc();
 }
 
@@ -1298,32 +1796,26 @@ function setArvMode(m){
   calc();
 }
 
-// Loan type change
-function updateAmField(){
-  c$('amField').style.display = gStr('loanType') === 'am' ? '' : 'none';
+function updateAmField(){ c$('amField').style.display = gStr('loanType') === 'am' ? '' : 'none'; }
+function updateFinFields(){
+  var on = c$('finEnabled').checked;
+  c$('finFields').style.opacity = on ? '1' : '.35';
+  c$('finFields').style.pointerEvents = on ? '' : 'none';
 }
 c$('loanType').addEventListener('change', function(){ updateAmField(); calc(); });
 
-// ════════════════════════════════════════════
-// UI: TOGGLES
-// ════════════════════════════════════════════
 function toggleAsm(){ c$('asmToggle').classList.toggle('open'); c$('asmBody').classList.toggle('show'); }
 function toggleBrk(){
   c$('brkToggle').classList.toggle('open'); c$('brkBody').classList.toggle('show');
   c$('brkLabel').textContent = c$('brkBody').classList.contains('show') ? 'Hide cost breakdown' : 'Show cost breakdown';
 }
-function toggleRisk(){
-  c$('riskToggle').classList.toggle('open'); c$('riskBody').classList.toggle('show');
-}
+function toggleRisk(){ c$('riskToggle').classList.toggle('open'); c$('riskBody').classList.toggle('show'); }
 function updateBufLabel(){
   var v = g('safeBuf');
   c$('bufVal').textContent = v + '%';
   c$('bufNote').textContent = 'Conservative offer deducts ' + v + '% of costs as a negotiation / contingency reserve';
 }
 
-// ════════════════════════════════════════════
-// PRESETS
-// ════════════════════════════════════════════
 function applyPreset(key){
   var p = PRESETS[key];
   if(!p) return;
@@ -1331,23 +1823,246 @@ function applyPreset(key){
   if(key === 'brrrr') applyProfile_byId('brrrr-profile');
   calc();
 }
-function applyProfile_byId(id){
-  state.selectedProfile = id;
-  applyProfile();
+
+(function loadUserProfile(){
+  try {
+    var saved = localStorage.getItem('arvosettle_user');
+    if(saved){ var u = JSON.parse(saved); state.user.name = u.name || ''; state.user.bio = u.bio || ''; }
+  } catch(e){}
+})();
+
+function saveStats(){
+  try {
+    if(state.stats.dealLog.length > 500) state.stats.dealLog = state.stats.dealLog.slice(-500);
+    localStorage.setItem('arvosettle_stats', JSON.stringify(state.stats));
+  } catch(e){}
 }
 
-// ════════════════════════════════════════════
-// INIT
-// ════════════════════════════════════════════
-document.querySelectorAll('input[type=number], select').forEach(function(el){
-  el.addEventListener('input', calc);
-});
+(function loadStats(){
+  try {
+    var saved = localStorage.getItem('arvosettle_stats');
+    if(saved){
+      var s = JSON.parse(saved);
+      state.stats.totalCalcs        = s.totalCalcs        || 0;
+      state.stats.calcTimestamps    = s.calcTimestamps     || [];
+      state.stats.dealLog           = s.dealLog            || [];
+      state.stats.moneySaved        = s.moneySaved         || 0;
+      state.stats.profileApplyCount = s.profileApplyCount  || 0;
+    }
+  } catch(e){}
+})();
 
-// Hide pro sections initially
+function updateAvatarUI(){
+  var name = state.user.name.trim();
+  var initials = name ? name.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase() : '?';
+  c$('topAvatarCircle').textContent  = initials;
+  c$('topAvatarName').textContent    = name || 'Profile';
+  c$('modalAvatarLg').textContent    = initials;
+  c$('modalDisplayName').textContent = name || 'Your Profile';
+  c$('modalBioPreview').textContent  = state.user.bio || 'Customize your ArvoSettle profile';
+}
+
+function upTabSwitch(tab){
+  ['stats','edit'].forEach(function(t){
+    c$('uptab-'   + t).classList.toggle('active', t === tab);
+    c$('uppanel-' + t).classList.toggle('active', t === tab);
+  });
+  // Show Save button only on edit tab
+  c$('saveProfileBtn').style.display = tab === 'edit' ? '' : 'none';
+}
+
+function openUserProfile(){
+  // Sync edit fields with current state
+  c$('userNameInput').value = state.user.name;
+  c$('userBioInput').value  = state.user.bio;
+  c$('bioCharCount').textContent = state.user.bio.length;
+
+  // Clear any leftover error states
+  c$('nameFilterMsg').classList.remove('show');
+  c$('bioFilterMsg').classList.remove('show');
+  c$('saveStatus').classList.remove('show');
+  c$('userNameInput').classList.remove('input-error');
+  c$('userBioInput').classList.remove('input-error');
+
+  // Reset save button
+  var btn = c$('saveProfileBtn');
+  btn.classList.remove('btn-saving');
+  btn.textContent = 'Save Profile';
+
+  updateAvatarUI();
+  upTabSwitch('stats');  // always open on stats tab
+  renderProfileStats();
+  c$('userProfileModal').classList.add('show');
+}
+
+function closeUserProfile(){ c$('userProfileModal').classList.remove('show'); }
+
+function computeVelocity(){
+  var ts = state.stats.calcTimestamps;
+  if(ts.length < 2) return null;
+  var sessions = [], cur = [ts[0]];
+  for(var i = 1; i < ts.length; i++){
+    if(ts[i] - ts[i-1] > 5 * 60 * 1000){ sessions.push(cur); cur = [ts[i]]; }
+    else cur.push(ts[i]);
+  }
+  sessions.push(cur);
+  var totalMs = 0, totalDeals = 0;
+  sessions.forEach(function(s){ if(s.length < 2) return; totalMs += s[s.length-1] - s[0]; totalDeals += s.length; });
+  if(totalDeals === 0) return null;
+  return totalMs / totalDeals;
+}
+
+function formatVelocity(ms){
+  if(ms === null) return { val: '—', sub: 'not enough data yet' };
+  var sec = ms / 1000;
+  if(sec < 60) return { val: Math.round(sec) + 's', sub: 'avg. per calculation' };
+  return { val: (Math.round(sec / 60 * 10) / 10) + ' min', sub: 'avg. per calculation' };
+}
+
+function drawProfitChart(){
+  var canvas = c$('profitChart');
+  if(!canvas) return;
+  var log = state.stats.dealLog;
+  var dpr = window.devicePixelRatio || 1;
+  var W = canvas.offsetWidth || 380, H = 90;
+  canvas.width = W * dpr; canvas.height = H * dpr;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  var ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr); ctx.clearRect(0, 0, W, H);
+
+  if(log.length < 2){
+    ctx.fillStyle = 'rgba(255,255,255,0.08)';
+    ctx.font = '11px DM Sans, sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(log.length === 0 ? 'Add deals to see your portfolio growth curve' : 'Add one more deal to see your growth curve', W/2, H/2);
+    c$('chartTotalProfit').textContent = '';
+    c$('chartDealCount').textContent = log.length === 0 ? 'No deals added yet' : '1 deal logged';
+    return;
+  }
+
+  var points = [], cumulative = 0;
+  log.forEach(function(d){ cumulative += d.profit; points.push({ y: cumulative }); });
+
+  var minY = Math.min.apply(null, points.map(function(p){ return p.y; }));
+  var maxY = Math.max.apply(null, points.map(function(p){ return p.y; }));
+  var rangeY = maxY - minY || 1;
+  var pad = { t:10, b:10, l:4, r:4 };
+  var chartW = W - pad.l - pad.r, chartH = H - pad.t - pad.b;
+
+  function px(i)  { return pad.l + (i / (points.length - 1)) * chartW; }
+  function py(val){ return pad.t + (1 - (val - minY) / rangeY) * chartH; }
+
+  var finalY = points[points.length-1].y;
+  var isPos = finalY >= 0;
+  var lineColor = isPos ? '#5a9e3a' : '#c84a3a';
+  var fillColor = isPos ? 'rgba(90,158,58,0.12)' : 'rgba(200,74,58,0.10)';
+
+  if(minY < 0 && maxY > 0){
+    var zy = py(0);
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 0.5;
+    ctx.setLineDash([3,4]); ctx.beginPath(); ctx.moveTo(pad.l, zy); ctx.lineTo(W-pad.r, zy); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  ctx.beginPath(); ctx.moveTo(px(0), py(points[0].y));
+  points.forEach(function(p, i){ if(i > 0) ctx.lineTo(px(i), py(p.y)); });
+  ctx.lineTo(px(points.length-1), H-pad.b); ctx.lineTo(px(0), H-pad.b);
+  ctx.closePath(); ctx.fillStyle = fillColor; ctx.fill();
+
+  ctx.beginPath(); ctx.moveTo(px(0), py(points[0].y));
+  points.forEach(function(p, i){ if(i > 0) ctx.lineTo(px(i), py(p.y)); });
+  ctx.strokeStyle = lineColor; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.stroke();
+
+  ctx.beginPath(); ctx.arc(px(points.length-1), py(finalY), 4, 0, Math.PI*2);
+  ctx.fillStyle = lineColor; ctx.fill();
+
+  c$('chartTotalProfit').textContent = (finalY >= 0 ? '+' : '') + '$' + Math.abs(Math.round(finalY)).toLocaleString('en-US') + ' cumulative';
+  c$('chartTotalProfit').style.color = isPos ? 'var(--green)' : 'var(--red)';
+  c$('chartDealCount').textContent = log.length + ' deal' + (log.length === 1 ? '' : 's') + ' logged';
+}
+
+function renderProfileStats(){
+  var s = state.stats;
+  c$('statTotalCalcs').textContent = s.totalCalcs.toLocaleString('en-US');
+  c$('statCalcSub').textContent = s.totalCalcs === 1 ? 'calculation run' : 'calculations run';
+  var vf = formatVelocity(computeVelocity());
+  c$('statVelocity').textContent    = vf.val;
+  c$('statVelocitySub').textContent = vf.sub;
+  c$('statMoneySaved').textContent  = '$' + Math.round(s.moneySaved).toLocaleString('en-US');
+  c$('statProfileApplies').textContent = s.profileApplyCount;
+  setTimeout(drawProfitChart, 30);
+}
+
+function onUserNameType(){
+  var v = c$('userNameInput').value.trim();
+  var initials = v ? v.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase() : '?';
+  c$('modalAvatarLg').textContent = initials;
+  c$('nameFilterMsg').classList.remove('show');
+  c$('userNameInput').classList.remove('input-error');
+}
+
+function onUserBioType(){
+  c$('bioCharCount').textContent = c$('userBioInput').value.length;
+  c$('bioFilterMsg').classList.remove('show');
+  c$('userBioInput').classList.remove('input-error');
+}
+
+async function filterContent(name, bio){
+  var prompt = 'You are a content moderation filter for a professional real estate investment app.\n\nCheck the following user profile fields and decide if they are acceptable for a professional platform.\nReject content that contains: profanity, slurs, hate speech, explicit sexual content, threats, extreme vulgarity, spam, or anything grossly inappropriate for a professional context.\nAllow: real names, nicknames, professional descriptions, locations, investment experience, neutral personal info, even mild informal language.\n\nName: ' + JSON.stringify(name) + '\nBio: ' + JSON.stringify(bio) + '\n\nRespond ONLY with valid JSON (no markdown, no extra text) in this exact shape:\n{"ok":true} if both fields are acceptable, or\n{"ok":false,"field":"name","reason":"one-sentence explanation"} if name is problematic, or\n{"ok":false,"field":"bio","reason":"one-sentence explanation"} if bio is problematic.';
+  var resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 100, messages: [{ role: 'user', content: prompt }] })
+  });
+  var data = await resp.json();
+  var text = (data.content || []).map(function(b){ return b.text || ''; }).join('').trim().replace(/```json|```/g, '').trim();
+  return JSON.parse(text);
+}
+
+async function saveUserProfile(){
+  var name = c$('userNameInput').value.trim();
+  var bio  = c$('userBioInput').value.trim();
+  if(!name){
+    c$('userNameInput').classList.add('input-error');
+    c$('nameFilterMsg').textContent = 'Please enter a display name.';
+    c$('nameFilterMsg').classList.add('show');
+    return;
+  }
+  var btn = c$('saveProfileBtn');
+  btn.textContent = 'Checking…'; btn.classList.add('btn-saving');
+  c$('nameFilterMsg').classList.remove('show'); c$('bioFilterMsg').classList.remove('show'); c$('saveStatus').classList.remove('show');
+  try {
+    var result = await filterContent(name, bio);
+    if(!result.ok){
+      var msgEl   = result.field === 'name' ? c$('nameFilterMsg') : c$('bioFilterMsg');
+      var inputEl = result.field === 'name' ? c$('userNameInput') : c$('userBioInput');
+      msgEl.textContent = result.reason || 'This content isn\'t allowed. Please revise.';
+      msgEl.classList.add('show'); inputEl.classList.add('input-error');
+      btn.textContent = 'Save Profile'; btn.classList.remove('btn-saving');
+      return;
+    }
+    state.user.name = name; state.user.bio = bio;
+    try { localStorage.setItem('arvosettle_user', JSON.stringify({ name: name, bio: bio })); } catch(e){}
+    updateAvatarUI();
+    btn.textContent = 'Saved ✓'; c$('saveStatus').classList.add('show');
+    setTimeout(function(){ closeUserProfile(); btn.textContent = 'Save Profile'; btn.classList.remove('btn-saving'); }, 900);
+  } catch(e){
+    c$('bioFilterMsg').textContent = 'Content check unavailable — saved without filter.';
+    c$('bioFilterMsg').classList.add('show');
+    state.user.name = name; state.user.bio = bio;
+    try { localStorage.setItem('arvosettle_user', JSON.stringify({ name: name, bio: bio })); } catch(e2){}
+    updateAvatarUI(); btn.textContent = 'Save Profile'; btn.classList.remove('btn-saving');
+  }
+}
+
+c$('userProfileModal').addEventListener('click', function(e){ if(e.target === c$('userProfileModal')) closeUserProfile(); });
+
+updateAvatarUI();
+
+document.querySelectorAll('input[type=number], select').forEach(function(el){ el.addEventListener('input', calc); });
 ['sec-financing','sec-risk','sec-arv'].forEach(function(id){ c$(id).style.display = 'none'; });
-
 setMode('simple');
 updateAmField();
+updateFinFields();
 </script>
 </body>
 </html>
